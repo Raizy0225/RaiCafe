@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart - Rai Cafe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dark-bg: #30333A;
+      --medium-accent: #72676F;
+      --light-accent: #9A8D96;
+      --mid-light-accent: #B0A6A7;
+      --pale-accent: #B79D9B;
+      --deep-accent: #51403D;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--dark-bg) url('css/assets/images/background1.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: var(--light-accent);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    .background-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(48, 51, 58, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: -1;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(48, 51, 58, 0.9);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      z-index: 10;
+    }
+
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .navbar-logo img {
+      height: 50px;
+    }
+
+    .navbar-menu {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      margin-left: 15px;
+    }
+
+    .navbar-menu a {
+      color: var(--mid-light-accent);
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar-menu a:hover {
+      background-color: var(--medium-accent);
+      color: var(--deep-accent);
+    }
+
+    .navbar-right-links a {
+      color: var(--light-accent);
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 5px;
+      background-color: var(--deep-accent);
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar-right-links a:hover {
+      background-color: var(--pale-accent);
+      color: var(--deep-accent);
+    }
+
+    .categories {
+      margin-top: 90px; /* Space for the navbar */
+      padding: 15px 40px;
+      background-color: rgba(48, 51, 58, 0.9);
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      position: sticky;
+      top: 70px;
+      z-index: 9;
+    }
+
+    .categories li {
+      list-style: none;
+      color: var(--light-accent);
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .categories li:hover {
+      background-color: var(--medium-accent);
+      color: var(--deep-accent);
+    }
+
+    .cart-content {
+      padding: 120px 40px;
+    }
+
+    .cart-items-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .checkout-section {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 10px;
+      border-top: 1px solid var(--mid-light-accent);
+    }
+
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: var(--dark-bg);
+      color: var(--light-accent);
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .modal-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .modal-form input, .modal-form textarea {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--light-accent);
+      border: 1px solid var(--mid-light-accent);
+      padding: 10px;
+      border-radius: 5px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .close-btn {
+      background: none;
+      color: var(--light-accent);
+      border: none;
+      font-size: 1.5em;
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      cursor: pointer;
+    }
+
+    .confirm-btn {
+      background-color: var(--deep-accent);
+      color: var(--light-accent);
+      border: none;
+      padding: 12px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.2em;
+      transition: background-color 0.3s ease;
+    }
+
+    .confirm-btn:hover {
+      background-color: var(--pale-accent);
+    }
+
+    .confirmation-message {
+      display: none;
+      color: var(--pale-accent);
+      font-weight: bold;
+      margin-top: 20px;
+      font-size: 1.2em;
+    }
+
+  .quantity-btn {
+    background-color: var(--medium-accent);
+    color: var(--light-accent);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .quantity-btn:hover {
+    background-color: var(--pale-accent);
+    color: var(--dark-bg);
+  }
+
+  .remove-btn {
+    background-color: var(--deep-accent);
+    color: var(--light-accent);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+  }
+
+  .remove-btn:hover {
+    background-color: var(--pale-accent);
+    color: var(--dark-bg);
+  }
+  </style>
+</head>
+<body>
+  <div class="background-overlay"></div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="navbar-left">
+      <div class="navbar-logo">
+        <a href="index.html"><img src="css/assets/images/logo.png" alt="Rai Cafe Logo"></a>
+      </div>
+      <ul class="navbar-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Menu</a></li>
+        <li> <a href="about.html">About Us</a></li>
+      </ul>
+    </div>
+    <div class="navbar-right-links">
+      <a href="login.html">Login</a>
+      <a href="signup.html">Sign Up</a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="cart-content">
+    <h2>Your Cart</h2>
+    <div id="cart-items" class="cart-items-container"></div>
+    <div class="checkout-section">
+      <p class="total-price">Total: $<span id="total-price">0.00</span></p>
+      <button class="confirm-btn" onclick="openCheckoutModal()">Checkout</button>
+    </div>
+  </main>
+
+  <!-- Checkout Modal -->
+  <div id="checkout-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeCheckoutModal()">&times;</span>
+      <h2>Checkout</h2>
+      <form class="modal-form" id="checkout-form" onsubmit="return handleCheckout(event)">
+        <input type="text" id="customer-name" placeholder="Name" required>
+        <input type="text" id="customer-contact" placeholder="Contact Number" required>
+        <textarea id="customer-address" rows="3" placeholder="Address" required></textarea>
+        <button type="submit" class="confirm-btn">Confirm</button>
+      </form>
+      <p id="confirmation-message" class="confirmation-message">Thank you for your purchase!</p>
+    </div>
+  </div>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartContainer = document.getElementById('cart-items');
+    const totalPriceContainer = document.getElementById('total-price');
+    const confirmationMessage = document.getElementById("confirmation-message");
+
+    function renderCart() {
+  cartContainer.innerHTML = '';
+  let total = 0;
+  cart.forEach((item, index) => {
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.innerHTML = `
+      <div style="flex: 1; margin-left: 15px;">
+        <h4>${item.name}</h4>
+        <p>Size: ${item.preferences?.size || 'Default'}</p>
+        <p>Toppings: ${item.preferences?.toppings || 'None'}</p>
+        <p>Syrup: ${item.preferences?.syrup || 'None'}</p>
+        <p>Price per item: $${item.price?.toFixed(2)}</p>
+        <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+          <button class="quantity-btn" onclick="changeQuantity(${index}, -1)">-</button>
+          <span>${item.quantity || 1}</span>
+          <button class="quantity-btn" onclick="changeQuantity(${index}, 1)">+</button>
+        </div>
+      </div>
+      <div style="text-align: right;">
+        <p>Subtotal: $${(item.price * (item.quantity || 1)).toFixed(2)}</p>
+        <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
+      </div>
+    `;
+    cartContainer.appendChild(div);
+    total += item.price * (item.quantity || 1);
+  });
+  totalPriceContainer.textContent = total.toFixed(2);
+}
+
+    function openCheckoutModal() {
+      document.getElementById("checkout-modal").style.display = "flex";
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById("checkout-modal").style.display = "none";
+      confirmationMessage.style.display = "none";
+    }
+
+    function handleCheckout(event) {
+      event.preventDefault();
+      const name = document.getElementById("customer-name").value;
+      const contact = document.getElementById("customer-contact").value;
+      const address = document.getElementById("customer-address").value;
+
+      if (name && contact && address) {
+        // Simulate checkout processing
+        cart = [];
+        localStorage.setItem('cart', JSON.stringify(cart));
+        renderCart();
+
+        // Show confirmation message
+        confirmationMessage.style.display = "block";
+
+        // Hide modal after 3 seconds
+        setTimeout(() => {
+          closeCheckoutModal();
+        }, 3000);
+      }
+    }
+
+    function changeQuantity(index, delta) {
+  if (cart[index]) {
+    cart[index].quantity = (cart[index].quantity || 1) + delta;
+    if (cart[index].quantity <= 0) {
+      // If quantity drops to 0, remove the item
+      removeFromCart(index);
+    } else {
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+    }
+  }
+}
+
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  localStorage.setItem('cart', JSON.stringify(cart));
+  renderCart();
+}
+
+
+    renderCart();
+  </script>
+</body>
+</html>
