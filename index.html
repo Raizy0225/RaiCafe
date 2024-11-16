@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rai Cafe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dark-bg: #30333A;
+      --medium-accent: #72676F;
+      --light-accent: #9A8D96;
+      --mid-light-accent: #B0A6A7;
+      --pale-accent: #B79D9B;
+      --deep-accent: #51403D;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--dark-bg) url('css/assets/images/bg1.gif') no-repeat center center fixed;
+      background-size: cover;
+      color: var(--light-accent);
+      overflow-x: hidden;
+    }
+
+    .background-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(48, 51, 58, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: -1;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(48, 51, 58, 0.9);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      z-index: 10;
+    }
+
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .navbar-logo img {
+      height: 50px;
+    }
+
+    .navbar-menu {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      margin-left: 15px;
+    }
+
+    .navbar-menu a {
+      color: var(--mid-light-accent);
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar-menu a:hover {
+      background-color: var(--medium-accent);
+      color: var(--deep-accent);
+    }
+
+    .navbar-right-links a {
+      color: var(--light-accent);
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 5px;
+      background-color: var(--deep-accent);
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar-right-links a:hover {
+      background-color: var(--pale-accent);
+      color: var(--deep-accent);
+    }
+
+    .content {
+      text-align: center;
+      padding: 180px 20px 0;
+      color: var(--light-accent);
+    }
+
+    h1 {
+      font-size: 3.5em;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: var(--mid-light-accent);
+    }
+
+    p {
+      font-size: 1.3em;
+      color: var(--light-accent);
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .posters {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      margin: 30px auto;
+      padding: 20px;
+      max-width: 1300px;
+    }
+
+    .poster {
+      width: 100%;
+      height: 850px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .explore-heading {
+      font-size: 2em;
+      font-weight: 500;
+      color: var(--light-accent);
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .description-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      max-width: 1200px;
+      margin: 50px auto;
+    }
+
+    .item {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: 20px;
+      gap: 20px;
+    }
+
+    .item:nth-child(odd) {
+      flex-direction: row-reverse;
+    }
+
+    .item img {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .description {
+      width: 50%;
+      color: var(--pale-accent);
+      font-size: 1.2em;
+    }
+
+    footer {
+      background-color: var(--deep-accent);
+      padding: 30px 20px;
+      text-align: center;
+      color: var(--pale-accent);
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .footer-columns {
+      display: flex;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-column {
+      flex: 1;
+      min-width: 200px;
+      margin-bottom: 20px;
+    }
+
+    .footer-column h3 {
+      color: var(--light-accent);
+      margin-bottom: 10px;
+      font-size: 1.2em;
+    }
+
+    .footer-column a, .footer-column p {
+      color: var(--pale-accent);
+      text-decoration: none;
+      font-size: 1.1em;
+      transition: color 0.3s ease;
+    }
+
+    .footer-column a:hover {
+      color: var(--light-accent);
+    }
+
+    .social-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .social-links a {
+      color: var(--pale-accent);
+      font-size: 1.1em;
+      transition: color 0.3s ease;
+      text-decoration: none;
+    }
+
+    .social-links a:hover {
+      color: var(--light-accent);
+    }
+
+    .floating-button {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: var(--deep-accent);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      z-index: 1000;
+    }
+
+    .floating-button img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+
+    .floating-button:hover {
+      transform: scale(1.1);
+    }
+
+    @media screen and (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  .navbar {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
+
+  .navbar-menu {
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+    width: 100%;
+    background-color: rgba(48, 51, 58, 0.9);
+    padding: 10px 0;
+  }
+
+  .navbar-menu.show {
+    display: flex; /* Show when toggled */
+  }
+
+  .navbar-menu a {
+    padding: 15px 20px;
+    text-align: center;
+  }
+
+  .description-section {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .item {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+
+  .item img {
+    width: 80%;
+    height: auto;
+  }
+
+  .floating-button {
+    width: 60px;
+    height: 60px;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  footer {
+    text-align: center;
+  }
+
+  .footer-columns {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+  <div class="background-overlay"></div>
+
+  <header class="navbar">
+    <div class="navbar-left">
+      <div class="navbar-logo">
+       <a href="index.html"><img src="css/assets/images/logo.png" alt="Rai Cafe Logo"></a>
+      </div>
+      <ul class="navbar-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Menu</a></li>
+        <li><a href="about.html">About Us</a></li>
+      </ul>
+    </div>
+    <div class="navbar-right-links">
+      <a href="login.html">Login</a>
+      <a href="signup.html">Sign Up</a>
+    </div>
+  </header>
+
+  <div class="floating-button">
+    <a href="cart.html"><img src="css/assets/images/cart.png" alt="Floating Button">  </a>
+  </div>
+
+  <div class="content">
+    <h1>Welcome to Rai Cafe</h1>
+    <p>Experience the best brews, cozy ambiance, and delicious pastries. Your perfect coffee break awaits!</p>
+    
+    <div class="posters">
+      <div class="poster" id="open-close-poster">
+        <img id="open-close-img" src="css/assets/images/open.png" alt="Open/Closed Poster" style="width: 100%; height: 100%;">
+      </div>
+      <div class="poster">
+        <img src="css/assets/images/poster1.png" alt="Decorative Poster" style="width: 100%; height: 100%;">
+      </div>
+    </div>
+
+    <h2 class="explore-heading">Explore Our Featured Cafe</h2>
+  </div>
+
+  <div class="description-section">
+    <div class="item">
+      <img src="css/assets/images/c1.png" alt="Signature Coffee">
+      <div class="description">
+        <h3>Signature Coffee</h3>
+        <p>A premium blend of hand-selected beans, offering a bold and unforgettable taste experience.</p>
+      </div>
+    </div>
+    <div class="item">
+      <img src="css/assets/images/c2.png" alt="Espresso Blend">
+      <div class="description">
+        <h3>Iced Coffee</h3>
+        <p>A refreshing brew served over ice, perfect for energizing hot summer days.</p>
+      </div>
+    </div>
+    <div class="item">
+      <img src="css/assets/images/c3.png" alt="Classic Latte">
+      <div class="description">
+        <h3>Iced Coffee Clover Vertica</h3>
+        <p>A chilled, aromatic coffee brewed to highlight smooth, nuanced flavors.</p>
+      </div>
+    </div>
+    <div class="item">
+      <img src="css/assets/images/c4.png" alt="Iced Mocha Frappe">
+      <div class="description">
+        <h3>Iced Apple Crisp Oatmilk Shake Espresso</h3>
+        <p>A harmonious blend of oat milk, espresso, and a crisp apple essence for a unique treat.</p>
+      </div>
+    </div>
+    <div class="item">
+      <img src="css/assets/images/c5.png" alt="Vanilla Bean Frappe">
+      <div class="description">
+        <h3>Iced Espresso</h3>
+        <p>A classic espresso served chilled, providing a bold and robust flavor.</p>
+      </div>
+    </div>
+    <div class="item">
+      <img src="css/assets/images/c6.png" alt="Caramel Frappe">
+      <div class="description">
+        <h3>Iced Hazelnut Oatmilk Shaken Espresso</h3>
+        <p>Delicate hazelnut flavors combined with smooth oat milk and shaken to perfection.</p>
+      </div>
+    </div>
+    <div class="item">
+      <img src="css/assets/images/c7.png" alt="Blueberry Muffin">
+      <div class="description">
+        <h3>Iced Brown Sugar Oatmilk Shaken Espresso</h3>
+        <p>A rich espresso with the sweetness of brown sugar and the creaminess of oat milk.</p>
+      </div>
+    </div>
+    <div class="item">
+      <img src="css/assets/images/c8.png" alt="Chocolate Croissant">
+      <div class="description">
+        <h3>Iced Shaken Espresso</h3>
+        <p>Freshly brewed espresso shaken with ice for a cool, frothy delight.</p>
+      </div>
+    </div>
+  </div>  
+
+  <footer>
+    <div class="footer-columns">
+      <div class="footer-column">
+        <h3>Contact Us</h3>
+        <p>#143 Bronx Street, Fairmont, Regalado Ave.</p>
+        <p>Email: redmercado1314@gmail.com</p>
+        <p>Phone: 0966-781-3904</p>
+      </div>
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <a href="index.html">Home</a><br>
+        <a href="about.html">About Us</a><br>
+        <a href="services.html">Menu</a><br>
+        <a href="login.html">Login</a><br>
+        <a href="signup.html">Sign Up</a>
+      </div>
+      <div class="footer-column">
+        <h3>Follow Us</h3>
+        <div class="social-links">
+          <a href="https://www.facebook.com/red1931220">Facebook - Red Mercado</a>
+          <a href="https://www.instagram.com/arjanmercado">Instagram - @arjanmercado</a>
+          <a href="https://www.tiktok.com/@redredredred1220">TikTok - @redredredred1220</a>
+        </div>
+      </div>
+    </div>
+    <p>&copy; 2024 Rai Cafe</p>
+  </footer>
+
+  <script>
+    function updateOpenClosePoster() {
+      const now = new Date();
+      const hours = now.getHours();
+      const isOpen = (hours >= 8 && hours < 21);
+
+      const posterImg = document.getElementById('open-close-img');
+      posterImg.src = isOpen ? 'css/assets/images/open.png' : 'css/assets/images/close.png';
+      posterImg.alt = isOpen ? 'Open' : 'Closed';
+    }
+
+    function toggleMenu() {
+    const menu = document.getElementById("menu");
+    menu.style.display = menu.style.display === "none" ? "block" : "none";
+  }
+
+    updateOpenClosePoster();
+    setInterval(updateOpenClosePoster, 60000);
+
+  </script>
+
+</body>
+</html>
