@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - Rai Cafe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dark-bg: #30333A;
+      --medium-accent: #72676F;
+      --light-accent: #9A8D96;
+      --mid-light-accent: #B0A6A7;
+      --pale-accent: #B79D9B;
+      --deep-accent: #51403D;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--dark-bg) url('css/assets/images/background2.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: var(--light-accent);
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .background-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(48, 51, 58, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: -1;
+    }
+
+    .navbar {
+      width: 100%;
+      background-color: var(--dark-bg);
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    .navbar ul li {
+      display: inline;
+    }
+
+    .navbar ul li a {
+      color: var(--mid-light-accent);
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2em;
+      transition: color 0.3s;
+    }
+
+    .navbar ul li a:hover {
+      color: var(--light-accent);
+    }
+
+    .container {
+      width: 400px;
+      background-color: var(--deep-accent);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      margin-top: 150px;
+    }
+
+    h2 {
+      color: var(--mid-light-accent);
+      margin-bottom: 15px;
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+      background-color: var(--light-accent);
+      color: var(--dark-bg);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      background-color: var(--medium-accent);
+      color: #FFF;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: var(--pale-accent);
+    }
+
+    .link {
+      display: block;
+      margin-top: 15px;
+      color: var(--mid-light-accent);
+      text-decoration: none;
+    }
+
+    footer {
+      background-color: var(--deep-accent);
+      padding: 30px 20px;
+      text-align: center;
+      color: var(--pale-accent);
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+    }
+
+    .footer-columns {
+      display: flex;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-column {
+      flex: 1;
+      min-width: 200px;
+      margin-bottom: 20px;
+    }
+
+    .footer-column h3 {
+      color: var(--light-accent);
+      margin-bottom: 10px;
+      font-size: 1.2em;
+    }
+
+    .footer-column a, .footer-column p {
+      color: var(--pale-accent);
+      text-decoration: none;
+      font-size: 1.1em;
+      transition: color 0.3s ease;
+    }
+
+    .footer-column a:hover {
+      color: var(--light-accent);
+    }
+
+    .social-links a {
+      color: var(--pale-accent);
+      font-size: 1.1em;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .custom-alert-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 9999;
+      display: none;
+    }
+
+    .custom-alert-content {
+      background: var(--dark-bg);
+      color: var(--light-accent);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+    }
+
+    .custom-alert-content button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: var(--medium-accent);
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .custom-alert-content button:hover {
+      background-color: var(--pale-accent);
+    }
+
+    @media screen and (max-width: 390px) {
+  body {
+    font-size: 14px;
+    padding: 0 15px;
+  }
+
+  .navbar {
+    padding: 10px 15px;
+    justify-content: space-between;
+  }
+
+  .navbar ul {
+    gap: 15px;
+  }
+
+  .navbar ul li a {
+    font-size: 1em;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 350px;
+    margin-top: 120px;
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+  }
+
+  input[type="text"], input[type="password"] {
+    padding: 10px;
+    font-size: 1em;
+  }
+
+  button {
+    padding: 10px;
+    font-size: 1em;
+  }
+
+  .link {
+    font-size: 0.9em;
+    margin-top: 10px;
+  }
+
+  footer {
+    font-size: 0.9em;
+    padding: 20px;
+  }
+
+  .footer-columns {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .footer-column h3 {
+    font-size: 1em;
+  }
+
+  .footer-column a, .footer-column p {
+    font-size: 0.9em;
+  }
+
+  .social-links a {
+    font-size: 0.9em;
+  }
+
+  .custom-alert-content {
+    font-size: 0.9em;
+    padding: 15px 20px;
+    max-width: 300px;
+  }
+
+  .custom-alert-content button {
+    padding: 8px 12px;
+    font-size: 0.9em;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="background-overlay"></div>
+
+  <div class="navbar">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Menu</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+  </div>
+
+  <div class="container">
+    <h2>Sign Up</h2>
+    <input type="text" id="signup-username" placeholder="Username" required>
+    <input type="password" id="signup-password" placeholder="Password" required>
+    <button onclick="signup()">Create Account</button>
+    <a href="login.html" class="link">Already have an account? Log in</a>
+  </div>
+
+  <div id="custom-alert" class="custom-alert-modal">
+    <div class="custom-alert-content">
+      <h3 id="custom-alert-title"></h3>
+      <p id="custom-alert-message"></p>
+      <button onclick="closeCustomAlert()">OK</button>
+    </div>
+  </div>  
+
+  <footer>
+    <div class="footer-columns">
+      <div class="footer-column">
+        <h3>Contact Us</h3>
+        <p>#143 Bronx Street, Fairmont, Regalado Ave.</p>
+        <p>Email: redmercado1314@gmail.com</p>
+        <p>Phone: 0966-781-3904</p>
+      </div>
+      <div class="footer-column">
+        <h3>Quick Links</h3>
+        <a href="index.html">Home</a><br>
+        <a href="about.html">About Us</a><br>
+        <a href="services.html">Menu</a><br>
+        <a href="login.html">Login</a><br>
+        <a href="signup.html">Sign Up</a>
+      </div>
+      <div class="footer-column">
+        <h3>Follow Us</h3>
+        <div class="social-links">
+          <a href="https://www.facebook.com/red1931220">Facebook - Red Mercado</a>
+          <a href="https://www.instagram.com/arjanmercado">Instagram - @arjanmercado</a>
+          <a href="https://www.tiktok.com/@redredredred1220">TikTok - @redredredred1220</a>
+        </div>
+      </div>
+    </div>
+    <p>&copy; 2024 Rai Cafe</p>
+  </footer>
+
+  <script>
+    function signup() {
+      const username = document.getElementById("signup-username").value;
+      const password = document.getElementById("signup-password").value;
+
+      if (username && password) {
+        localStorage.setItem("username", username);
+        localStorage.setItem("password", password);
+        showCustomAlert("Success", "Account created successfully! Please log in.");
+        setTimeout(() => window.location.href = "login.html", 2000);
+      } else {
+        showCustomAlert("Error", "Please fill out both fields.");
+      }
+    }
+
+    function showCustomAlert(title, message) {
+      document.getElementById("custom-alert-title").textContent = title;
+      document.getElementById("custom-alert-message").textContent = message;
+      document.getElementById("custom-alert").style.display = "flex";
+    }
+
+    function closeCustomAlert() {
+      document.getElementById("custom-alert").style.display = "none";
+    }
+  </script>
+</body>
+</html>
